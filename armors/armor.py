@@ -55,3 +55,19 @@ class Armor:
     # setter method for crit_dmg
     def set_crit_dmg(self, crit_dmg:float) -> None:
         self.crit_dmg = crit_dmg
+    
+    def __str__(self) -> str:
+        text = self.name +":"
+        if self.HP:
+            text += f"\r\n  + {self.HP} HP"
+        if self.mana:
+            text += f"\r\n  + {self.mana} mana"
+        if self.rage:
+            text += f"\r\n  + {self.rage} rage"
+        if self.defense:
+            text += f"\r\n  + {self.defense} defense"
+        if self.crit_rate:
+            text += f"\r\n  + {self.crit_rate} crit rate"
+        if self.crit_dmg:
+            text += f"\r\n  + {self.crit_dmg} crit damage"
+        return text
