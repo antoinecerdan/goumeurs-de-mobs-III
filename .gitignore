@@ -1,6 +1,2 @@
 env/
-armors/leggings/__pycache__/
-armors/helmets/__pycache__/
-armors/chestplates/__pycache__/
-armors/boots/__pycache__/
-armors/__pycache__/
+__pycache__/
