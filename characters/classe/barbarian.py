@@ -1,6 +1,6 @@
-from classe import Classe
+from character import Character
 
-class Barbarian(Classe):
+class Barbarian(Character):
     def __init__(self,name, HP, defense, rage):
-        Classe.__init__(name, HP, defense)
+        Character.__init__(name, HP, defense)
         self.rage = rage

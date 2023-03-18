@@ -1,6 +1,6 @@
-from classe import Classe
+from character import Character
 
-class Tank(Classe):
+class Tank(Character):
     def __init__(self, name, HP, defense, mana):
-        Classe.__init__(name, HP, defense)
+        Character.__init__(name, HP, defense)
         self.mana = mana
