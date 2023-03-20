@@ -1,8 +1,8 @@
-from classe import Classe
+from characters.character import Character
 
-class Archer(Classe):
-    def __init__(self, name, HP, defense, mana):
-        Classe.__init__(name, HP, defense)
+class Archer(Character):
+    def __init__(self, name:str, HP:int = 200, defense:int = 50, mana:int = 100):
+        Character.__init__(self, name, HP, defense)
         self.mana = mana
         # todo arrow_nbr
         # todo arrow_type
