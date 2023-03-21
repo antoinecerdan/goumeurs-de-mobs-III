@@ -8,8 +8,3 @@ class Archer(Character):
         self.token_limit = (2,1) #MAGICAL / PHYSICAL 
         # todo arrow_nbr
         # todo arrow_type
-    
-    
-    def classe_name(self) -> str:
-        print("t")
-        return "Archer"
