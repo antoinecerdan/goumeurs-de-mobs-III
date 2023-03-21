@@ -14,6 +14,7 @@ class Character:
         self.leggings = leggings
         self.boots = boots
     
+        
     # getter method for helmet
     def get_helmet(self) -> Helmet:
         return self.helmet

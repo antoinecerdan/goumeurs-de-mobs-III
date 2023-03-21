@@ -7,13 +7,13 @@ class MagicalToken(Token):
 
     def attack(self):
         match self.spell:
-            case "freezeSpell":
+            case "flashSpell":
                 self.freezeSpell()
 
-    def freezeSpell(self):
+    def flashSpell(self):
         pass
 
 
-freeze = MagicalToken("Le froid mdr","freezeSpell",50)
-freeze.use()
+biden = MagicalToken("(BIDEN FLASH)","flashSpell",50)
+biden.use()
         
