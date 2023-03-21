@@ -5,9 +5,15 @@ class MagicalToken(Token):
         super().__init__(name,trigger_chance)
         self.spell = spell
 
-    def freezeSpell():
+    def attack(self):
+        match self.spell:
+            case "freezeSpell":
+                self.freezeSpell()
+
+    def freezeSpell(self):
         pass
 
 
 freeze = MagicalToken("Le froid mdr","freezeSpell",50)
+freeze.use()
         
