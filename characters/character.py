@@ -8,9 +8,7 @@ class Character:
         self.name = name
         self.HP = HP
         self.defense = defense
-        
-        # self.weapon1 = weapon1
-        # self.weapon2 = weapon2
+        self.tokens = []
         self.helmet = helmet
         self.chestplate = chestplate
         self.leggings = leggings

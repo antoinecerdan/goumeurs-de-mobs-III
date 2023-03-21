@@ -1,4 +1,4 @@
-from token import Token
+from tokens.token import Token
 
 class MagicalToken(Token):
     def __init__(self,name,spell,trigger_chance) -> None:

@@ -1,7 +1,7 @@
 class Arena:
-    def __init__(self,first_character,second_character) -> None:
-        first_character = first_character
-        second_character = second_character
-
-    def fight(self):
+    def __init__(self) -> None:
         pass
+
+    def fight(first_character,second_character):
+        print(first_character)
+        print(second_character)
