@@ -3,18 +3,45 @@ from armors.chestplates.chestplate import Chestplate
 from armors.leggings.leggings import Leggings
 from armors.boots.boots import Boots
 
+from tokens.token import Token
+from tokens.physical_token import PhysicalToken
+from tokens.magical_token import MagicalToken
+
+from typing import Type
+
 class Character:
     def __init__(self, name:str, HP:int, defense:int, helmet:'Helmet' = Helmet("",0,0,0,0,0,0), chestplate:'Chestplate' = Chestplate("",0,0,0,0,0,0), leggings:'Leggings' = Leggings("",0,0,0,0,0,0), boots:'Boots' = Boots("",0,0,0,0,0,0)):
         self.name = name
         self.HP = HP
         self.defense = defense
         self.tokens = []
+        self.token_limit = (0,0)
         self.helmet = helmet
         self.chestplate = chestplate
         self.leggings = leggings
         self.boots = boots
     
-        
+    def equip_token(self,token: Type[Token]):
+        if token.isinstance(MagicalToken):
+            if self.get_token_types()[0] + 1 > self.token_limit[0]:
+                print("no.")
+        elif token.isinstance(PhysicalToken):
+            if self.get_token_types()[1] + 1 > self.token_limit[1]:
+                print("no.")
+        else: 
+            return -1
+    def get_tokens(self):
+        return self.tokens
+    
+    def get_token_types(self):
+        res = (0,0)
+        for token in self.tokens:
+            if token.isinstance(MagicalToken):
+                res[0] += 1
+            elif token.isinstance(PhysicalToken):
+                res[1] += 1
+        return res
+
     # getter method for helmet
     def get_helmet(self) -> Helmet:
         return self.helmet
