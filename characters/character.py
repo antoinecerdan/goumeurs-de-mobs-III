@@ -10,11 +10,12 @@ from tokens.magical_token import MagicalToken
 from typing import Type
 
 class Character:
-    def __init__(self, name:str, HP:int, defense:int, helmet:'Helmet' = Helmet("",0,0,0,0,0,0), chestplate:'Chestplate' = Chestplate("",0,0,0,0,0,0), leggings:'Leggings' = Leggings("",0,0,0,0,0,0), boots:'Boots' = Boots("",0,0,0,0,0,0)):
+    def __init__(self, name:str, hp:int, defense:int, helmet:'Helmet' = Helmet("",0,0,0,0,0,0), chestplate:'Chestplate' = Chestplate("",0,0,0,0,0,0), leggings:'Leggings' = Leggings("",0,0,0,0,0,0), boots:'Boots' = Boots("",0,0,0,0,0,0)):
         self.name = name
-        self.HP = HP
+        self.hp = hp
         self.defense = defense
         self.tokens = []
+        self.weapon = None
         self.token_limit = (0,0)
         self.helmet = helmet
         self.chestplate = chestplate
@@ -32,6 +33,7 @@ class Character:
             else: print("You have too much Physical tokens equipped !")
         else: 
             print("Unknown error while switching tokens.")
+
     def get_tokens(self):
         return self.tokens
     
@@ -80,8 +82,8 @@ class Character:
     def set_boots(self, boots:'Boots') -> None:
         self.boots = boots
     
-    def get_max_HP(self) -> float:
-        return (self.HP + self.helmet.get_HP() + self.chestplate.get_HP() + self.leggings.get_HP() + self.boots.get_HP())
+    def get_max_hp(self) -> float:
+        return (self.hp + self.helmet.get_hp() + self.chestplate.get_hp() + self.leggings.get_hp() + self.boots.get_hp())
     
     def get_defense(self) -> float:
         return (self.defense + self.helmet.get_defense() + self.chestplate.get_defense() + self.leggings.get_defense() + self.boots.get_defense())
@@ -103,11 +105,26 @@ class Character:
             return True
         else:
             return False
+        
+    def is_dead(self) -> bool:
+        return self.hp <= 0
+    
+    def choose_attack(self):
+        choice = None
+        while choice not in ['t','h']:
+            choice = str(input("Do you want to use your [T]okens, or your [H]and weapon ? >>> ")).lower()
+        print(choice)
+        if choice.lower() == "t":
+            pass
+        if choice.lower() == "h":
+            return 69420
+
+
     
     def __str__(self) -> str:
         text = f"({self.classe_name}) " + self.name +":"
-        if self.HP:
-            text += f"\r\n  + {self.HP}/{self.get_max_HP()} HP"
+        if self.hp:
+            text += f"\r\n  + {self.hp}/{self.get_max_hp()} hp"
         if self.defense:
             text += f"\r\n  + {self.get_defense()} defense"
         if self.has_crit_rate:

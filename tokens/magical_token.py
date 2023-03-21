@@ -13,6 +13,8 @@ class MagicalToken(Token):
     def flashSpell(self):
         pass
 
+
+
     def __str__(self) -> str:
         return (f"(MagicalToken) {self.name}\n  + Trigger chance : {self.trigger_chance} % \n  + Spell : {self.spell}")
         

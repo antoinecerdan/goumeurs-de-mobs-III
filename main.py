@@ -73,7 +73,7 @@ match choice:
             
 print(choice)
 def get_user_input(msg):
-    return str(input(msg + " >>>"))
+    return str(input(msg + " >>> "))
 
 def parse_user_input(cmd):
         cmd.strip()

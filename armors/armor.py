@@ -1,7 +1,7 @@
 class Armor:
-    def __init__(self, name:str, HP:int, mana:int, rage:int, defense:int, crit_rate:float, crit_dmg:float):
+    def __init__(self, name:str, hp:int, mana:int, rage:int, defense:int, crit_rate:float, crit_dmg:float):
         self.name = name
-        self.HP = HP
+        self.hp = hp
         self.mana = mana
         self.rage = rage
         self.defense = defense
@@ -9,12 +9,12 @@ class Armor:
         self.crit_dmg = crit_dmg
     
     # getter method for HP
-    def get_HP(self) -> int:
-        return self.HP
+    def get_hp(self) -> int:
+        return self.hp
 
     # setter method for HP
-    def set_HP(self, HP:int) -> None:
-        self.HP = HP
+    def set_hp(self, hp:int) -> None:
+        self.hp = hp
     
     # getter method for mana
     def get_mana(self) -> int:
@@ -58,8 +58,8 @@ class Armor:
     
     def __str__(self) -> str:
         text = self.name +":"
-        if self.HP:
-            text += f"\r\n  + {self.HP} HP"
+        if self.hp:
+            text += f"\r\n  + {self.hp} hp"
         if self.mana:
             text += f"\r\n  + {self.mana} mana"
         if self.rage:

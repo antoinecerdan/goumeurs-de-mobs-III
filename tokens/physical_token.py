@@ -8,7 +8,7 @@ class PhysicalToken(Token):
         self.defense = defense
 
     def attack():
-        pass
+        return 696969
 
 
 
