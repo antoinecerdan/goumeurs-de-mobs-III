@@ -4,6 +4,3 @@ import random
 
 starter_physical_tokens = []
 starter_magical_tokens = []
-
-def get_random_gear(bundle):
-    return random.choice(bundle)
