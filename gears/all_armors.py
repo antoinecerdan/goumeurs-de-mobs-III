@@ -1,7 +1,7 @@
-from armors.helmets.helmet import Helmet
-from armors.chestplates.chestplate import Chestplate
-from armors.leggings.leggings import Leggings
-from armors.boots.boots import Boots
+from armors.helmet import Helmet
+from armors.chestplate import Chestplate
+from armors.leggings import Leggings
+from armors.boots import Boots
 
 import random
 
