@@ -8,7 +8,7 @@ class MagicalToken(Token):
     def attack(self):
         match self.spell:
             case "flashSpell":
-                self.freezeSpell()
+                self.flashSpell()
 
     def flashSpell(self):
         pass
