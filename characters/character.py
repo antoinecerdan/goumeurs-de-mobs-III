@@ -21,26 +21,32 @@ class Character:
         self.leggings = leggings
         self.boots = boots
     
-    def equip_token(self,token: Type[Token]):
-        if token.isinstance(MagicalToken):
-            if self.get_token_types()[0] + 1 > self.token_limit[0]:
-                print("no.")
-        elif token.isinstance(PhysicalToken):
-            if self.get_token_types()[1] + 1 > self.token_limit[1]:
-                print("no.")
+    def set_token(self,token: Type[Token]):
+        if type(token) == MagicalToken:
+            if not (self.get_token_types()[0] + 1 > self.token_limit[0]):
+                self.tokens.append(token)
+            else: print("You have too much Magical tokens equipped !")
+        elif type(token) == PhysicalToken:
+            if not (self.get_token_types()[1] + 1 > self.token_limit[1]):
+                self.tokens.append(token)
+            else: print("You have too much Physical tokens equipped !")
         else: 
-            return -1
+            print("Unknown error while switching tokens.")
     def get_tokens(self):
         return self.tokens
     
-    def get_token_types(self):
-        res = (0,0)
+    def print_tokens(self):
         for token in self.tokens:
-            if token.isinstance(MagicalToken):
-                res[0] += 1
-            elif token.isinstance(PhysicalToken):
-                res[1] += 1
-        return res
+            print(str(token) + "\n")
+    def get_token_types(self):
+        magical = 0
+        physical = 0
+        for token in self.tokens:
+            if type(token) == MagicalToken:
+                    magical += 1
+            elif type(token) == PhysicalToken:
+                physical += 1
+        return (magical,physical)
 
     # getter method for helmet
     def get_helmet(self) -> Helmet:

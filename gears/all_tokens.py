@@ -4,3 +4,7 @@ import random
 
 starter_physical_tokens = []
 starter_magical_tokens = []
+
+
+
+biden = MagicalToken("(BIDEN FLASH)","flashSpell",50)
