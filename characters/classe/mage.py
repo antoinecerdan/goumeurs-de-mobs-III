@@ -4,7 +4,4 @@ class Mage(Character):
     def __init__(self, name:str, HP:int = 200, defense:int = 50, mana:int = 100):
         Character.__init__(self, name, HP, defense)
         self.mana = mana
-    
-    
-    def classe_name(self) -> str:
-        return "Mage"
+        self.classe_name = "Mage"

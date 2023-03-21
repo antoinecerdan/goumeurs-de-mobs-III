@@ -7,8 +7,3 @@ class Archer(Character):
         self.mana = mana
         # todo arrow_nbr
         # todo arrow_type
-    
-    
-    def classe_name(self) -> str:
-        print("t")
-        return "Archer"
