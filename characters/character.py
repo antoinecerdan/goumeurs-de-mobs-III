@@ -2,6 +2,8 @@ from armors.helmet import Helmet
 from armors.chestplate import Chestplate
 from armors.leggings import Leggings
 from armors.boots import Boots
+from math import ceil
+import random
 
 from tokens.token import Token
 from tokens.physical_token import PhysicalToken
@@ -15,7 +17,6 @@ class Character:
         self.hp = hp
         self.defense = defense
         self.tokens = []
-        self.weapon = None
         self.token_limit = (0,0)
         self.helmet = helmet
         self.chestplate = chestplate
@@ -40,6 +41,7 @@ class Character:
     def print_tokens(self):
         for token in self.tokens:
             print(str(token) + "\n")
+
     def get_token_types(self):
         magical = 0
         physical = 0
@@ -83,9 +85,11 @@ class Character:
         self.boots = boots
     
     def get_max_hp(self) -> float:
-        return (self.hp + self.helmet.get_hp() + self.chestplate.get_hp() + self.leggings.get_hp() + self.boots.get_hp())
+        return (self.basic_hp + self.helmet.get_hp() + self.chestplate.get_hp() + self.leggings.get_hp() + self.boots.get_hp())
     
     def get_defense(self) -> float:
+        if hasattr(self, "shield"):
+            return (self.defense + self.helmet.get_defense() + self.chestplate.get_defense() + self.leggings.get_defense() + self.boots.get_defense()+ self.get_shield().get_defense())
         return (self.defense + self.helmet.get_defense() + self.chestplate.get_defense() + self.leggings.get_defense() + self.boots.get_defense())
     
     def get_crit_rate(self) -> float:
@@ -105,21 +109,39 @@ class Character:
             return True
         else:
             return False
-        
+    
+    def full_heal(self) -> None:
+        self.hp = self.get_max_hp()
+    
     def is_dead(self) -> bool:
         return self.hp <= 0
     
     def choose_attack(self):
         choice = None
         while choice not in ['t','h']:
-            choice = str(input("Do you want to use your [T]okens, or your [H]and weapon ? >>> ")).lower()
+            choice = str(input(f"{self.name}: Do you want to use your [T]okens, or your [H]and weapon ? >>> ")).lower()
         print(choice)
         if choice.lower() == "t":
             pass
-        if choice.lower() == "h":
-            return 69420
-
-
+        if choice.lower() == "h": 
+            return self.get_weapon().get_dmg()
+    
+    def damage_reduction(self, damage, enemy:'Character') -> float:
+        defense = enemy.get_defense()
+        return ceil((1-(defense/500)) * damage)
+    
+    def attack(self, damage, enemy:'Character'):
+        enemy.set_damage(damage)
+    
+    def set_damage(self, damage) -> None:
+        hp = self.hp
+        self.hp = (hp - damage)
+    
+    def has_crit(self, damage) -> float:
+        if random.random() <= (self.get_crit_rate()/100):
+            print("You made a critical move")
+            return ceil(damage * (1+(self.get_crit_dmg()/100)))
+        return damage
     
     def __str__(self) -> str:
         text = f"({self.classe_name}) " + self.name +":"
