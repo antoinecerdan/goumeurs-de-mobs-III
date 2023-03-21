@@ -1,8 +1,7 @@
 import pyfiglet
 from enum import Enum
 from characters.character import Character
-import gears.all_armors
-import gears.all_tokens
+import gears.all_armors,gears.all_tokens
 from utilities.arena import Arena
 
 GAME = True
