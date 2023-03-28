@@ -131,6 +131,7 @@ class Character:
         return ceil((1-(defense/500)) * damage)
     
     def attack(self, damage, enemy:'Character'):
+        print(f"{self.name} attacked {enemy.name} and he made {damage} damages")
         enemy.set_damage(damage)
     
     def set_damage(self, damage) -> None:

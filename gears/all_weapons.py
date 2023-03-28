@@ -22,3 +22,34 @@ starter_mass = [Masse("Le Fléau du Fromage Fondant", 10), Masse("La Foudre Frit
 
 def get_random_gear(bundle):
     return random.choice(bundle)
+
+
+def get_all_name_bow_start() -> list[str]:
+    list = []
+    for x in starter_bow:
+        list.append(x.name)
+    return list
+
+def get_all_name_staff_start() -> list[str]:
+    list = []
+    for x in starter_staff:
+        list.append(x.name)
+    return list
+
+def get_all_name_shield_start() -> list[str]:
+    list = []
+    for x in starter_shield:
+        list.append(x.name)
+    return list
+
+def get_all_name_hatchet_start() -> list[str]:
+    list = []
+    for x in starter_hatchet:
+        list.append(x.name)
+    return list
+
+def get_all_name_mass_start() -> list[str]:
+    list = []
+    for x in starter_mass:
+        list.append(x.name)
+    return list

@@ -15,3 +15,9 @@ class Barbarian(Character):
     
     def set_weapon(self, weapon:Hachette) -> None:
         self.weapon = weapon
+        
+    def attack(self, damage, enemy:'Character'):
+        print(f"{self.name} attacked {enemy.name} and he made {damage} damages")
+        enemy.set_damage(damage)
+        print(f"{self.name} attacked {enemy.name} and he made {damage} damages")
+        enemy.set_damage(damage)
