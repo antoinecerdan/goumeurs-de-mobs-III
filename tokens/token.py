@@ -11,6 +11,9 @@ class Token:
         if rand >= self.trigger_chance:
             print("The token landed on the good side !")
             self.attack()
+        else:
+            print("The token landed on the bad side :(")
+
 
     def attack(self):
         pass

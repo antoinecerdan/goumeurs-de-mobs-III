@@ -122,7 +122,7 @@ class Character:
             choice = str(input(f"{self.name}: Do you want to use your [T]okens, or your [H]and weapon ? >>> ")).lower()
         print(choice)
         if choice.lower() == "t":
-            pass
+            return self.launch_tokens()
         if choice.lower() == "h": 
             return self.get_weapon().get_dmg()
     
@@ -143,6 +143,11 @@ class Character:
             print("You made a critical move")
             return ceil(damage * (1+(self.get_crit_dmg()/100)))
         return damage
+    
+    def launch_tokens(self):
+        for token in self.get_tokens():
+            token.use()
+            
     
     def __str__(self) -> str:
         text = f"({self.classe_name}) " + self.name +":"
