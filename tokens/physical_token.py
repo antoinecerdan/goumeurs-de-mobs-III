@@ -7,8 +7,8 @@ class PhysicalToken(Token):
         self.damage = damage
         self.defense = defense
 
-    def attack():
-        return 696969
+    def attack(self):
+        return self.damage
 
 
 

@@ -11,7 +11,7 @@ class MagicalToken(Token):
                 self.flashSpell()
 
     def flashSpell(self):
-        pass
+        return 5734897534897543965298562 # jsp flemme de faire des sorts ya plus de temps
 
 
 
