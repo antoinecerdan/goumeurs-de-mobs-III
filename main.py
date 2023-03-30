@@ -13,43 +13,53 @@ from os.path import exists
 
 Players = {}
 
+# Si le fichier Players.pkl existe, on le charge
 if exists('Players.pkl'):
     with open('Players.pkl', 'rb') as file:
-        # Call load method to deserialze
-        Players = pickle.load(file)
+        Players = pickle.load(file) # Désérialise les données
 
-# Clearing the Screen
+# Efface l'écran
 cls = lambda: os.system('cls')
 
+# Choisit un titre au hasard
 title = random.choice(utilities.title.title_choice)
+# Utilise le titre pour créer un texte ASCII art avec la librairie Pyfiglet
 figlet = pyfiglet.figlet_format("Goumeurs de mobs III", font = title[0], width = title[1])
+# Concatène le titre et le texte ASCII art
 title = f"{figlet} \n\n {title[2]} \n\n\n"
+
+# Boucle principale du programme
 while True:
+    # Affiche le menu principal avec le titre
     choice = utilities.menu.menu(title, ['Play', 'New game', 'Quit'])
+    
+    # Utilise la structure switch/case pour gérer les choix de l'utilisateur
     match choice:
         case 0:
             print("Play")
             cls()
+            # Si au moins un joueur existe, on affiche le sous-menu pour sélectionner un personnage
             if len(Players) >= 1:
                 utilities.menu.submenu_play(title)
+            # Sinon, on crée un nouveau joueur
             else:
                 Players[(len(Players) + 1)] = utilities.menu.create_characters(title)
                 with open('Players.pkl', 'wb') as file: 
-                    # A new file will be created
-                    pickle.dump(Players, file)
+                    pickle.dump(Players, file) # Sérialise les données et les enregistre dans le fichier 'Players.pkl'
         case 1:
             print("New game")
             if len(Players) > 0:
-                pass
+                pass # TODO: Gérer la création d'une nouvelle partie avec des joueurs existants
             else:
-                pass
+                pass # TODO: Gérer la création d'une nouvelle partie sans joueurs existants
             cls()
         case 2:
-            cls()
+            # Sauvegarde les données des joueurs dans le fichier 'Players.pkl' avant de quitter le programme
             with open('Players.pkl', 'wb') as file: 
-                # A new file will be created
                 pickle.dump(Players, file)
-            break
+            cls() # Efface l'écran une dernière fois avant de quitter le programme
+            break # Sort de la boucle principale et termine le programme
+
 
 # GAME = False
 # print("non")
