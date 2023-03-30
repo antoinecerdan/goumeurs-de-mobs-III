@@ -116,7 +116,7 @@ class Character:
     def is_dead(self) -> bool:
         return self.hp <= 0
     
-    def choose_attack(self):
+    def choose_attack(self) -> float:
         choice = None
         while choice not in ['t','h']:
             choice = str(input(f"{self.name}: Do you want to use your [T]okens, or your [H]and weapon ? >>> ")).lower()
