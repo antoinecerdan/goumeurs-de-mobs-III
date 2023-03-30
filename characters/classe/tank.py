@@ -1,25 +1,25 @@
-from characters.character import Character
-from weapons.masse import Masse
-from weapons.bouclier import Bouclier
+from characters.character import Character # Importation de la classe mère Character
+from weapons.masse import Masse # Importation de la classe Masse
+from weapons.bouclier import Bouclier # Importation de la classe Bouclier
 
-class Tank(Character):
+class Tank(Character): # Définition de la classe Tank qui hérite de la classe mère Character
     def __init__(self, name:str, HP:int = 200, defense:int = 100, mana:int = 50, weapon:Masse = Masse("", 10), shield:Bouclier = Bouclier("",10)):
-        Character.__init__(self, name, HP, defense)
-        self.classe_name = "Tank"
-        self.mana = mana
-        self.basic_hp = 200
-        self.weapon = weapon
-        self.shield = shield
-        self.token_limit = (1,2) #MAGICAL / PHYSICAL 
+        Character.__init__(self, name, HP, defense) # Appel du constructeur de la classe mère Character
+        self.classe_name = "Tank" # Définition du nom de classe
+        self.mana = mana # Définition de l'attribut mana
+        self.basic_hp = 200 # Initialisation de la santé de base
+        self.weapon = weapon # Initialisation de l'arme
+        self.shield = shield # Initialisation du bouclier
+        self.token_limit = (1,2) # Définition de l'attribut token_limit
     
-    def get_weapon(self) -> Masse:
+    def get_weapon(self) -> Masse: # Définition de la méthode get_weapon qui retourne une instance de la classe Masse
         return self.weapon
     
-    def set_weapon(self, weapon:Masse) -> None:
+    def set_weapon(self, weapon:Masse) -> None: # Définition de la méthode set_weapon qui modifie l'attribut weapon avec une instance de la classe Masse
         self.weapon = weapon
     
-    def get_shield(self) -> Bouclier:
+    def get_shield(self) -> Bouclier: # Définition de la méthode get_shield qui retourne une instance de la classe Bouclier
         return self.shield
     
-    def set_shield(self, shield:Bouclier) -> None:
+    def set_shield(self, shield:Bouclier) -> None: # Définition de la méthode set_shield qui modifie l'attribut shield avec une instance de la classe Bouclier
         self.shield = shield

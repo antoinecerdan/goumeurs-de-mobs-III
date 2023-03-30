@@ -19,11 +19,13 @@ starter_hatchet = [Hachette("La hache de l'absurde", 10), Hachette("La hache vé
 starter_mass = [Masse("Le Fléau du Fromage Fondant", 10), Masse("La Foudre Frite", 10), Masse("L'Ouragan des Olives", 10), Masse("Le Tremblement de Terre aux Tomates", 10)]
 
 
-
+# La fonction suivante renvoie un élément aléatoire dans une liste donnée
 def get_random_gear(bundle):
     return random.choice(bundle)
 
-
+# Les fonctions suivantes retournent une liste contenant tous les noms des équipements 
+# correspondants à leur type d'équipement. Les noms sont extraits à partir de listes d'objets 
+# qui possèdent un attribut nom, tel que starter_bow, starter_staff, etc.
 def get_all_name_bow_start() -> list[str]:
     list = []
     for x in starter_bow:

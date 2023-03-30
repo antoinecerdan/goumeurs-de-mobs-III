@@ -17,29 +17,35 @@ starter_boots = [Boots("Bottes de la licorne arc-en-ciel", 1, 1, 1, 1, 1, 1), Bo
 
 
 
+# Cette fonction renvoie un élément aléatoire d'un ensemble (bundle)
 def get_random_gear(bundle):
     return random.choice(bundle)
 
+# Cette fonction retourne une liste de noms de tous les casques de départ disponibles
 def get_all_name_helmet_start() -> list[str]:
     list = []
     for x in starter_helmets:
         list.append(x.name)
     return list
 
+# Cette fonction retourne une liste de noms de toutes les plastrons de départ disponibles
 def get_all_name_chestplate_start() -> list[str]:
     list = []
     for x in starter_chestplate:
         list.append(x.name)
     return list
 
+# Cette fonction retourne une liste de noms de tous les pantalons de départ disponibles
 def get_all_name_leggins_start() -> list[str]:
     list = []
     for x in starter_leggings:
         list.append(x.name)
     return list
 
+# Cette fonction retourne une liste de noms de toutes les bottes de départ disponibles
 def get_all_name_boots_start() -> list[str]:
     list = []
     for x in starter_boots:
         list.append(x.name)
     return list
+
