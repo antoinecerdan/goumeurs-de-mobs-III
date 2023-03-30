@@ -113,7 +113,8 @@ def create_characters(title:str) -> Character:
             p.set_leggings(choose_armor_leggins("Choisir votre pantalon"))
             p.set_boots(choose_armor_boots("Choisir vos chaussure"))
             p.set_weapon(choose_weapon_bow("Choisir ton arc"))
-            p.set_token(gears.all_tokens.biden)
+            for x in gears.all_tokens.starter_magical_tokens_bow:
+                p.set_token(x)
             # Restaurer la santé complète du personnage et le retourner
             p.full_heal()
             return p
@@ -127,7 +128,8 @@ def create_characters(title:str) -> Character:
             p.set_leggings(choose_armor_leggins("Choisir votre pantalon"))
             p.set_boots(choose_armor_boots("Choisir vos chaussure"))
             p.set_weapon(choose_weapon_hatchet("Choisir ta hachette"))
-            p.set_token(gears.all_tokens.biden)
+            for x in gears.all_tokens.starter_physical_tokens_hachette:
+                p.set_token(x)
             # Restaurer la santé complète du personnage et le retourner
             p.full_heal()
             return p
@@ -141,7 +143,8 @@ def create_characters(title:str) -> Character:
             p.set_leggings(choose_armor_leggins("Choisir votre pantalon"))
             p.set_boots(choose_armor_boots("Choisir vos chaussure"))
             p.set_weapon(choose_weapon_staff("Choisir vos baton"))
-            p.set_token(gears.all_tokens.biden)
+            for x in gears.all_tokens.starter_magical_tokens_baton:
+                p.set_token(x)
             # Restaurer la santé complète du personnage et le retourner
             p.full_heal()
             return p
@@ -156,7 +159,8 @@ def create_characters(title:str) -> Character:
             p.set_boots(choose_armor_boots("Choisir vos chaussure"))
             p.set_weapon(choose_weapon_mass("Choisir votre masse"))
             p.set_shield(choose_weapon_shield("Choisir votre bouclier"))
-            p.set_token(gears.all_tokens.biden)
+            for x in gears.all_tokens.starter_physical_tokens_masse:
+                p.set_token(x)
             # Restaurer la santé complète du personnage et le retourner
             p.full_heal()
             return p

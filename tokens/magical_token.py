@@ -1,20 +1,15 @@
 from tokens.token import Token
 
 class MagicalToken(Token):
-    def __init__(self,name,spell,trigger_chance) -> None:
+    def __init__(self,name:str, damage:float, cost:int, trigger_chance:int = 50) -> None:
         super().__init__(name,trigger_chance)
-        self.spell = spell
+        self.damage = damage
+        self.cost = cost
 
-    def attack(self):
-        match self.spell:
-            case "flashSpell":
-                return self.flashSpell()
-
-    def flashSpell(self):
-        return 5734897534897543965298562 # jsp flemme de faire des sorts ya plus de temps
-
+    def attack(self) -> float:
+        return self.damage
 
 
     def __str__(self) -> str:
-        return (f"(MagicalToken) {self.name}\n  + Trigger chance : {self.trigger_chance} % \n  + Spell : {self.spell}")
+        return (f"(MagicalToken) {self.name}\n  + Trigger chance : {self.trigger_chance} %")
         

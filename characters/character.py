@@ -2,7 +2,9 @@ from armors.helmet import Helmet
 from armors.chestplate import Chestplate
 from armors.leggings import Leggings
 from armors.boots import Boots
+import gears.all_tokens
 from math import ceil
+from pick import pick
 import random
 
 from tokens.token import Token
@@ -10,6 +12,12 @@ from tokens.physical_token import PhysicalToken
 from tokens.magical_token import MagicalToken
 
 from typing import Type
+
+
+# Fonction qui affiche un menu et retourne l'index de l'option choisie
+def menu(title:str, options: list[str]):
+    option, index = pick(options, title, indicator='->', default_index=0)
+    return index
 
 class Character:
     def __init__(self, name:str, hp:int, defense:int, helmet:'Helmet' = Helmet("",0,0,0,0,0,0), chestplate:'Chestplate' = Chestplate("",0,0,0,0,0,0), leggings:'Leggings' = Leggings("",0,0,0,0,0,0), boots:'Boots' = Boots("",0,0,0,0,0,0)):
@@ -24,33 +32,36 @@ class Character:
         self.boots = boots
     
     def set_token(self,token: Type[Token]):
-        if type(token) == MagicalToken:
-            if not (self.get_token_types()[0] + 1 > self.token_limit[0]):
-                self.tokens.append(token)
-            else: print("You have too much Magical tokens equipped !")
-        elif type(token) == PhysicalToken:
-            if not (self.get_token_types()[1] + 1 > self.token_limit[1]):
-                self.tokens.append(token)
-            else: print("You have too much Physical tokens equipped !")
-        else: 
-            print("Unknown error while switching tokens.")
+        self.tokens.append(token)
+    
+    # def set_token(self,token: Type[Token]):
+    #     if type(token) == MagicalToken:
+    #         if not (self.get_token_types()[0] + 1 > self.token_limit[0]):
+    #             self.tokens.append(token)
+    #         else: print("You have too much Magical tokens equipped !")
+    #     elif type(token) == PhysicalToken:
+    #         if not (self.get_token_types()[1] + 1 > self.token_limit[1]):
+    #             self.tokens.append(token)
+    #         else: print("You have too much Physical tokens equipped !")
+    #     else: 
+    #         print("Unknown error while switching tokens.")
 
-    def get_tokens(self):
+    def get_tokens(self) -> list[Token]:
         return self.tokens
     
-    def print_tokens(self):
-        for token in self.tokens:
-            print(str(token) + "\n")
+    # def print_tokens(self):
+    #     for token in self.tokens:
+    #         print(str(token) + "\n")
 
-    def get_token_types(self):
-        magical = 0
-        physical = 0
-        for token in self.tokens:
-            if type(token) == MagicalToken:
-                    magical += 1
-            elif type(token) == PhysicalToken:
-                physical += 1
-        return (magical,physical)
+    # def get_token_types(self):
+    #     magical = 0
+    #     physical = 0
+    #     for token in self.tokens:
+    #         if type(token) == MagicalToken:
+    #                 magical += 1
+    #         elif type(token) == PhysicalToken:
+    #             physical += 1
+    #     return (magical,physical)
 
     # getter method for helmet
     def get_helmet(self) -> Helmet:
@@ -146,10 +157,30 @@ class Character:
     
     def launch_tokens(self) -> float:
         total_dmg = 0
-        for token in self.get_tokens():
-            total_dmg += token.use()
+        for x in range(self.token_limit[0]):
+            if Token.use():
+                total_dmg += self.choose_tokens("magic").attack()
+        for x in range(self.token_limit[1]):
+            if Token.use():
+                total_dmg += self.choose_tokens("physique").attack()
         
+        if total_dmg == 0:
+            print("You were really unlucky, but you still hit it with your pocket equipment!")
+            total_dmg += self.get_weapon().get_dmg()
         return total_dmg
+    
+    def choose_tokens(self, name:str) -> Token:
+        list = []
+        if name == "magic":
+            for x in self.get_tokens():
+                if type(x) == MagicalToken:
+                    list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Mana")
+        else:
+            for x in self.get_tokens():
+                if type(x) == PhysicalToken:
+                    list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Rage")
+        choice = menu("Choisir votre spells:", list)
+        return self.get_tokens()[choice]
     
     def __str__(self) -> str:
         text = f"({self.classe_name}) " + self.name +":"
