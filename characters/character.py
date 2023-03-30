@@ -145,9 +145,11 @@ class Character:
         return damage
     
     def launch_tokens(self):
+        a = 0
         for token in self.get_tokens():
-            token.use()
-            
+            a += token.use()
+        
+        return a
     
     def __str__(self) -> str:
         text = f"({self.classe_name}) " + self.name +":"

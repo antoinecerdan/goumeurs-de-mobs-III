@@ -5,7 +5,7 @@ class Token:
         self.name = name
         self.trigger_chance = trigger_chance
 
-    def use(self):
+    def use(self) -> float:
         rand = random.randint(1,100)
         # print("rand: " + str(rand) + " trigger chance : " + str(self.trigger_chance))
         if rand >= self.trigger_chance:
@@ -16,6 +16,6 @@ class Token:
             return 0
 
 
-    def attack(self):
+    def attack(self) -> int:
         return 13
 
