@@ -10,7 +10,7 @@ class Token:
         # print("rand: " + str(rand) + " trigger chance : " + str(self.trigger_chance))
         if rand >= self.trigger_chance:
             print("The token landed on the good side !")
-            self.attack()
+            return self.attack()
         else:
             print("The token landed on the bad side :(")
             return 0

@@ -145,11 +145,11 @@ class Character:
         return damage
     
     def launch_tokens(self):
-        a = 0
+        total_dmg = 0
         for token in self.get_tokens():
-            a += token.use()
+            total_dmg += token.use()
         
-        return a
+        return total_dmg
     
     def __str__(self) -> str:
         text = f"({self.classe_name}) " + self.name +":"
