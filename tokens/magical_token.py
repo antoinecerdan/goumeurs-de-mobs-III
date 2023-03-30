@@ -8,10 +8,10 @@ class MagicalToken(Token):
     def attack(self):
         match self.spell:
             case "flashSpell":
-                self.flashSpell()
+                return self.flashSpell()
 
-    def flashSpell(self):
-        pass
+    def flashSpell(self) -> float:
+        return 13
 
 
 

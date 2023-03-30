@@ -15,7 +15,3 @@ class Token:
             print("The token landed on the bad side :(")
             return 0
 
-
-    def attack(self) -> int:
-        return 13
-
