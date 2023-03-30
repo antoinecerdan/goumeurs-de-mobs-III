@@ -144,7 +144,7 @@ class Character:
             return ceil(damage * (1+(self.get_crit_dmg()/100)))
         return damage
     
-    def launch_tokens(self):
+    def launch_tokens(self) -> float:
         total_dmg = 0
         for token in self.get_tokens():
             total_dmg += token.use()

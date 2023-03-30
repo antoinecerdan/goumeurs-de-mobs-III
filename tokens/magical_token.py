@@ -8,7 +8,7 @@ class MagicalToken(Token):
     def attack(self):
         match self.spell:
             case "flashSpell":
-                self.flashSpell()
+                return self.flashSpell()
 
     def flashSpell(self):
         return 5734897534897543965298562 # jsp flemme de faire des sorts ya plus de temps
