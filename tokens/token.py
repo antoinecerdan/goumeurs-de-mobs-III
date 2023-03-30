@@ -13,8 +13,9 @@ class Token:
             self.attack()
         else:
             print("The token landed on the bad side :(")
+            return 0
 
 
     def attack(self):
-        pass
+        return 13
 
