@@ -1,6 +1,7 @@
 from os.path import exists
 from pick import pick
 import pickle
+import random
 from utilities.arena import Arena
 from characters.character import Character
 from characters.classe.archer import Archer
@@ -16,6 +17,7 @@ from weapons.baton import Baton
 from weapons.bouclier import Bouclier
 from weapons.hachette import Hachette
 from weapons.masse import Masse
+from monsters.monster import Monster  # import de la classe Monster depuis le module monsters
 import gears.all_armors
 import gears.all_weapons
 import gears.all_tokens
@@ -61,11 +63,13 @@ def submenu_play(title:str):
                         # Sauvegarde des joueurs dans le fichier binaire Players.pkl
                         pickle.dump(Players, file)
             case 1:
-                if len(Players) > 0:
-                    pass
+                if len(Players) >= 1:
+                    submenu_pre_fight_mobs()
                 else:
-                    pass
-                cls()
+                    Players[(len(Players) + 1)] = create_characters(title)
+                    with open('Players.pkl', 'wb') as file: 
+                        # Sauvegarde des joueurs dans le fichier binaire Players.pkl
+                        pickle.dump(Players, file)
             case 2:
                 break
 
@@ -93,7 +97,31 @@ def submenu_pre_fight_player():
         choice = menu("Choisir votre adversaire:", list)
         Player2 = getCharactereByName(list[choice], Players)
         # Lancement du combat
-        Arena.fight(Player1, Player2)
+        Arena.fight_PvP(Player1, Player2)
+        break
+
+def submenu_pre_fight_mobs():
+    global Players
+    # ça c'est juste que je suis parano
+    Players.clear()
+    # on vérifie si le fichier de sauvegarde existe avant de l'importer
+    if exists('Players.pkl'):
+        with open('Players.pkl', 'rb') as file:
+            # Chargement des joueurs à partir du fichier binaire Players.pkl
+            Players = pickle.load(file)
+    list = []
+    # On va lister tout les joueurs possible afin de savoir qui affronté
+    for cle, valeur in Players.items():
+        list.append(valeur.name)
+    while True:
+        # Sélection du premier combattant
+        choice = menu("Choisir votre personnage:", list)
+        Player1 = getCharactereByName(list[choice], Players)
+        
+        # Sélection du second combattant
+        choice = menu("Choisir votre difficulté:", ["Niveau 1", "Niveau 2","Niveau 3","Niveau 4","Niveau 5"])
+        # Lancement du combat
+        Arena.fight_PvE(Player1, generate_one_mob(choice + 1))
         break
 
 def create_characters(title:str) -> Character:
@@ -215,3 +243,21 @@ def getCharactereByName(name:str, Players:dict) -> Character:
     for cle, valeur in Players.items():
         if valeur.name == name:
             return valeur
+
+def generate_one_mob(difficulty) -> Monster:
+        """
+        Génère un monstres en fonction de la difficulté donnée
+
+        Parameters:
+        difficulty (int): difficulté de la pièce
+        """
+        if difficulty <= 1:
+            return Monster(random.randrange(1,10*difficulty),Monster.get_random_name())
+        if difficulty == 2:
+            return Monster(random.randrange(10,10*difficulty),Monster.get_random_name())
+        if difficulty == 3:
+            return Monster(random.randrange(20,10*difficulty),Monster.get_random_name())
+        if difficulty == 4:
+            return Monster(random.randrange(30,10*difficulty),Monster.get_random_name())
+        if difficulty >= 5:
+            return Monster(random.randrange(40,10*difficulty),Monster.get_random_name())
