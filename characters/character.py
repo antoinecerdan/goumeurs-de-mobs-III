@@ -123,7 +123,7 @@ class Character:
                 if canAttack:
                     return self.launch_tokens()
                 else:
-                    print("Vous n'avais pas assez de mana ou rage")
+                    print("Vous n'avez pas assez de mana ou rage")
             if choice.lower() == "h": 
                 return self.get_weapon().get_dmg()
     
@@ -173,6 +173,9 @@ class Character:
                     if hasattr(self, "rage"):
                         if self.rage >= x.cost:
                             list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Rage")
+        if len(list) == 0:
+            print("Vous n'avez pas assez de mana ou rage")
+            return PhysicalToken("",0,0,0)
         choice = menu("Choisir votre spells:", list)
         if hasattr(self, "mana"):
             self.mana -= self.get_tokens()[choice].cost

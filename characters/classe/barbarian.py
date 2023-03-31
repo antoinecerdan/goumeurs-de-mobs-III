@@ -13,9 +13,9 @@ class Barbarian(Character):
     - basic_hp (int): les points de vie de base du personnage.
     - token_limit (Tuple[int, int]): la limite de jetons magiques et physiques que le personnage peut avoir.
     """
-    def __init__(self,name:str, HP:int = 300, defense:int = 25, rage:int = 100, weapon:Hachette = Hachette("",10)):
+    def __init__(self,name:str, hp:int = 300, defense:int = 25, rage:int = 100, weapon:Hachette = Hachette("",10)):
         # Appeler la méthode __init__ de la classe parente "Character" pour initialiser les attributs de la classe "Barbarian"
-        Character.__init__(self, name, HP, defense)
+        Character.__init__(self, name, hp, defense)
         self.classe_name = "Barbarian"
         self.rage = rage
         self.weapon = weapon

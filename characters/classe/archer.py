@@ -6,9 +6,9 @@ from weapons.arc import Arc
 # La classe "Archer" hérite de la classe "Character"
 class Archer(Character):
     # La méthode __init__ de la classe "Archer" utilise la méthode __init__ de la classe "Character" pour initialiser les attributs de la classe "Archer"
-    def __init__(self, name:str, HP:int = 200, defense:int = 50, mana:int = 100, weapon:Arc = Arc("", 10)):
+    def __init__(self, name:str, hp:int = 200, defense:int = 50, mana:int = 100, weapon:Arc = Arc("", 10)):
         # Appeler la méthode __init__ de la classe parente "Character" pour initialiser les attributs de la classe "Archer"
-        Character.__init__(self, name, HP, defense)
+        Character.__init__(self, name, hp, defense)
         self.classe_name = "Archer"
         self.mana = mana
         self.basic_hp = 200
