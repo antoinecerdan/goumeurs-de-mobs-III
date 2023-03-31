@@ -9,7 +9,7 @@ class Monster(Character):
         return random.choice(name_of_monster)
     
     # Constructeur de la classe Monster
-    def __init__(self, level:int, name:str, hp:int = 150, defense:int = 50, damage:int = 30):
+    def __init__(self, level:int, name:str, hp:int = 300, defense:int = 100, damage:int = 50):
         Character.__init__(self, name, hp, defense)
         self.name = name
         self.level = level
