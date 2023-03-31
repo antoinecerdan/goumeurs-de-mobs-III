@@ -5,6 +5,7 @@ from armors.boots import Boots
 import gears.all_tokens
 from math import ceil
 from pick import pick
+from sty import fg
 import random
 
 from tokens.token import Token
@@ -18,6 +19,8 @@ from typing import Type
 def menu(title:str, options: list[str]):
     option, index = pick(options, title, indicator='->', default_index=0)
     return index
+
+
 
 class Character:
     def __init__(self, name:str, hp:int, defense:int, helmet:'Helmet' = Helmet("",0,0,0,0,0,0), chestplate:'Chestplate' = Chestplate("",0,0,0,0,0,0), leggings:'Leggings' = Leggings("",0,0,0,0,0,0), boots:'Boots' = Boots("",0,0,0,0,0,0)):
@@ -110,7 +113,7 @@ class Character:
     def choose_attack(self) -> float:
         choice = None
         while True:
-            choice = str(input(f"{self.name}: Do you want to use your [T]okens, or your [H]and weapon ? >>> ")).lower()
+            choice = str(input(f"{self.name}: Do you want to use your [{fg.red}T{fg.rs}]okens, or your [{fg.red}H{fg.rs}]and weapon ? >>> ")).lower()
             if choice.lower() == "t":
                 canAttack = False
                 for x in self.get_tokens():
@@ -123,7 +126,7 @@ class Character:
                 if canAttack:
                     return self.launch_tokens()
                 else:
-                    print("Vous n'avez pas assez de mana ou rage")
+                    print(f"{fg.red}Vous n'avez pas assez de mana ou rage{fg.rs}")
             if choice.lower() == "h": 
                 return self.get_weapon().get_dmg()
     
@@ -132,7 +135,7 @@ class Character:
         return ceil((1-(defense/500)) * damage)
     
     def attack(self, damage, enemy:'Character'):
-        print(f"{self.name} attacked {enemy.name} and he made {damage} damages")
+        print(f"{self.name} attacked {enemy.name} and he made {fg.red}{damage} damages{fg.rs}")
         enemy.set_damage(damage)
     
     def set_damage(self, damage) -> None:
@@ -141,7 +144,7 @@ class Character:
     
     def has_crit(self, damage) -> float:
         if random.random() <= (self.get_crit_rate()/100):
-            print("You made a critical move")
+            print(f"{fg.green}You made a critical move{fg.rs}")
             return ceil(damage * (1+(self.get_crit_dmg()/100)))
         return damage
     
@@ -155,7 +158,7 @@ class Character:
                 total_dmg += self.choose_tokens("physique").attack()
         
         if total_dmg == 0:
-            print("You were really unlucky, but you still hit it with your pocket equipment!")
+            print(f"{fg.red}You were really unlucky, but you still hit it with your pocket equipment!{fg.rs}")
             total_dmg += self.get_weapon().get_dmg()
         return total_dmg
     
@@ -174,7 +177,7 @@ class Character:
                         if self.rage >= x.cost:
                             list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Rage")
         if len(list) == 0:
-            print("Vous n'avez pas assez de mana ou rage")
+            print(f"{fg.red}Vous n'avez pas assez de mana ou rage{fg.rs}")
             return PhysicalToken("",0,0,0)
         choice = menu("Choisir votre spells:", list)
         if hasattr(self, "mana"):

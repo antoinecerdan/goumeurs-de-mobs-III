@@ -1,4 +1,5 @@
 import random
+from sty import fg
 
 class Token:
     def __init__(self,name,trigger_chance) -> None:
@@ -9,8 +10,8 @@ class Token:
         rand = random.randint(1,100)
         # print("rand: " + str(rand) + " trigger chance : " + str(self.trigger_chance))
         if rand >= 50:
-            print("The token landed on the good side !")
+            print(f"{fg.green}The token landed on the good side !{fg.rs}")
             return True
         else:
-            print("The token landed on the bad side :(")
+            print(f"{fg.red}The token landed on the bad side :({fg.rs}")
             return False

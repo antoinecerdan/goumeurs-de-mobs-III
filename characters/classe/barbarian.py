@@ -1,5 +1,6 @@
 from characters.character import Character
 from weapons.hachette import Hachette
+from sty import fg
 
 # La classe "Barbarian" hérite de la classe "Character"
 class Barbarian(Character):
@@ -39,10 +40,10 @@ class Barbarian(Character):
         - enemy (Character): l'ennemi à attaquer.
         """
         # Affiche un message d'attaque.
-        print(f"{self.name} attacked {enemy.name} and he made {damage} damages")
+        print(f"{self.name} attacked {enemy.name} and he made {fg.red}{damage} damages{fg.rs}")
         # Inflige les dégâts à l'ennemi.
         enemy.set_damage(damage)
         # Affiche un message de deuxième attaque (spécifique au Barbare).
-        print(f"{self.name} attacked {enemy.name} and he made {damage} damages")
+        print(f"{self.name} attacked {enemy.name} and he made {fg.red}{damage} damages{fg.rs}")
         # Inflige les dégâts à l'ennemi une deuxième fois.
         enemy.set_damage(damage)

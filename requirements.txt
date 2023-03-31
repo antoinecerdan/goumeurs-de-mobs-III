@@ -7,4 +7,5 @@ pathspec==0.11.0
 pick==2.2.0
 platformdirs==3.0.0
 pyfiglet==0.8.post1
+sty==1.0.4
 windows-curses==2.3.1
