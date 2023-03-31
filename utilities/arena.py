@@ -61,13 +61,35 @@ class Arena:
             # Détermination des dégâts infligés par le premier personnage
             dmg = first_character.damage_reduction(first_character.has_crit(first_character.choose_attack()),second_character)
             first_character.attack(dmg, second_character)
+            text = f"{first_character.name}"
+            if first_character.hp:
+                text += f"  {first_character.hp}/{first_character.get_max_hp()} hp"
+            if hasattr(first_character, "mana"):
+                text += f"  {first_character.mana} mana"
+            if hasattr(first_character, "rage"):
+                text += f"  {first_character.rage} rage"
+            print(text)
+            text = f"{second_character.name}"
+            if second_character.hp:
+                text += f"  {second_character.hp}/{second_character.get_max_hp()} hp"
+            print(text)
             # Si le deuxième personnage n'est pas mort, détermination des dégâts infligés par le deuxième personnage
             if not second_character.is_dead():
                 dmg = second_character.damage_reduction(second_character.has_crit(second_character.choose_attack()),first_character)
                 second_character.attack(dmg, first_character)
-            # Affichage des informations des deux personnages après chaque tour de combat
-            print(first_character)
-            print(second_character)
+                # print les information du combats
+                text = f"{first_character.name}"
+                if first_character.hp:
+                    text += f"  {first_character.hp}/{first_character.get_max_hp()} hp"
+                if hasattr(first_character, "mana"):
+                    text += f"  {first_character.mana} mana"
+                if hasattr(first_character, "rage"):
+                    text += f"  {first_character.rage} rage"
+                print(text)
+                text = f"{second_character.name}"
+                if second_character.hp:
+                    text += f"  {second_character.hp}/{second_character.get_max_hp()} hp"
+                print(text)
         # Affichage du nom du personnage gagnant
         if first_character.is_dead():
             input(f"{second_character.name} won the fight. Press ENTER to exit the PVE arene mode")

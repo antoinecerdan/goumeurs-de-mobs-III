@@ -13,6 +13,7 @@ class Monster(Character):
         Character.__init__(self, name, hp, defense)
         self.name = name
         self.level = level
+        self.basic_hp = 500 # Initialisation de la santé de base
         # Calcul des points de vie et de défense du monstre en fonction de son niveau
         self.hp = ceil((level/25) * hp)
         self.defense = ceil((level/25) * defense)
