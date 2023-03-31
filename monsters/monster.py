@@ -9,13 +9,13 @@ class Monster(Character):
         return random.choice(name_of_monster)
     
     # Constructeur de la classe Monster
-    def __init__(self, level:int, name:str, hp:int = 300, defense:int = 100, damage:int = 50):
+    def __init__(self, level:int, name:str, hp:int = 500, defense:int = 100, damage:int = 50):
         Character.__init__(self, name, hp, defense)
         self.name = name
         self.level = level
         # Calcul des points de vie et de défense du monstre en fonction de son niveau
-        self.hp = ceil((level/35) * hp)
-        self.defense = ceil((level/35) * defense)
+        self.hp = ceil((level/25) * hp)
+        self.defense = ceil((level/25) * defense)
         self.damage = ceil((level/25) * damage)
     
     # Méthode pour afficher les caractéristiques du monstre
