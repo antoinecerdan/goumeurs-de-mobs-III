@@ -13,7 +13,7 @@ class Archer(Character):
         self.mana = mana
         self.basic_hp = 200
         self.weapon = weapon
-        self.token_limit = (2,1) #MAGICAL / PHYSICAL 
+        self.token_limit = (3,0) #MAGICAL / PHYSICAL 
         self.nbr_arrow = 10
         # TODO arrow_type
         

@@ -23,3 +23,5 @@ class Arena:
         # Récupération de tous les points de vie pour les deux personnages
         first_character.full_heal()
         second_character.full_heal()
+        first_character.full_mana_rage()
+        second_character.full_mana_rage()

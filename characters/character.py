@@ -33,35 +33,9 @@ class Character:
     
     def set_token(self,token: Type[Token]):
         self.tokens.append(token)
-    
-    # def set_token(self,token: Type[Token]):
-    #     if type(token) == MagicalToken:
-    #         if not (self.get_token_types()[0] + 1 > self.token_limit[0]):
-    #             self.tokens.append(token)
-    #         else: print("You have too much Magical tokens equipped !")
-    #     elif type(token) == PhysicalToken:
-    #         if not (self.get_token_types()[1] + 1 > self.token_limit[1]):
-    #             self.tokens.append(token)
-    #         else: print("You have too much Physical tokens equipped !")
-    #     else: 
-    #         print("Unknown error while switching tokens.")
 
     def get_tokens(self) -> list[Token]:
         return self.tokens
-    
-    # def print_tokens(self):
-    #     for token in self.tokens:
-    #         print(str(token) + "\n")
-
-    # def get_token_types(self):
-    #     magical = 0
-    #     physical = 0
-    #     for token in self.tokens:
-    #         if type(token) == MagicalToken:
-    #                 magical += 1
-    #         elif type(token) == PhysicalToken:
-    #             physical += 1
-    #     return (magical,physical)
 
     # getter method for helmet
     def get_helmet(self) -> Helmet:
@@ -124,18 +98,34 @@ class Character:
     def full_heal(self) -> None:
         self.hp = self.get_max_hp()
     
+    def full_mana_rage(self) -> None:
+        if hasattr(self, "mana"):
+            self.mana = 100
+        if hasattr(self, "rage"):
+            self.rage = 100
+    
     def is_dead(self) -> bool:
         return self.hp <= 0
     
     def choose_attack(self) -> float:
         choice = None
-        while choice not in ['t','h']:
+        while True:
             choice = str(input(f"{self.name}: Do you want to use your [T]okens, or your [H]and weapon ? >>> ")).lower()
-        print(choice)
-        if choice.lower() == "t":
-            return self.launch_tokens()
-        if choice.lower() == "h": 
-            return self.get_weapon().get_dmg()
+            if choice.lower() == "t":
+                canAttack = False
+                for x in self.get_tokens():
+                    if hasattr(self, "mana"):
+                        if self.mana >= x.cost:
+                            canAttack = True
+                    if hasattr(self, "rage"):
+                        if self.rage >= x.cost:
+                            canAttack = True
+                if canAttack:
+                    return self.launch_tokens()
+                else:
+                    print("Vous n'avais pas assez de mana ou rage")
+            if choice.lower() == "h": 
+                return self.get_weapon().get_dmg()
     
     def damage_reduction(self, damage, enemy:'Character') -> float:
         defense = enemy.get_defense()
@@ -174,12 +164,20 @@ class Character:
         if name == "magic":
             for x in self.get_tokens():
                 if type(x) == MagicalToken:
-                    list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Mana")
+                    if hasattr(self, "mana"):
+                        if self.mana >= x.cost:
+                            list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Mana")
         else:
             for x in self.get_tokens():
                 if type(x) == PhysicalToken:
-                    list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Rage")
+                    if hasattr(self, "rage"):
+                        if self.rage >= x.cost:
+                            list.append(f"{x.name}    Damage: {x.damage}    Cost: {x.cost} Rage")
         choice = menu("Choisir votre spells:", list)
+        if hasattr(self, "mana"):
+            self.mana -= self.get_tokens()[choice].cost
+        if hasattr(self, "rage"):
+            self.rage -= self.get_tokens()[choice].cost
         return self.get_tokens()[choice]
     
     def __str__(self) -> str:
