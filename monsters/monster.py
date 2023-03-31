@@ -1,6 +1,7 @@
 import random
 from characters.character import Character
 from math import ceil
+from sty import fg
 
 class Monster(Character):
     # Fonction qui renvoie un nom de monstre au hasard
@@ -47,5 +48,5 @@ class Monster(Character):
         return self.damage
 
     def attack(self, damage: float, enemy:'Character'):
-        print(f"{self.name} attacked {enemy.name} and he made {damage} damages")
+        print(f"{self.name} attacked {enemy.name} and he made {fg.red}{damage} damages{fg.rs}")
         enemy.set_damage(damage)
